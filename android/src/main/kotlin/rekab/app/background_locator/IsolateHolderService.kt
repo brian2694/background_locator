@@ -14,6 +14,7 @@ import rekab.app.background_locator.Keys.Companion.ARG_NOTIFICATION_MSG
 import rekab.app.background_locator.Keys.Companion.ARG_NOTIFICATION_TITLE
 import rekab.app.background_locator.Keys.Companion.ARG_WAKE_LOCK_TIME
 import rekab.app.background_locator.Keys.Companion.CHANNEL_ID
+import android.app.PendingIntent
 
 class IsolateHolderService : Service() {
     companion object {
@@ -62,7 +63,8 @@ class IsolateHolderService : Service() {
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationMsg)
                 .setSmallIcon(imageId)
-                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(PendingIntent.getActivity(this, 0, Intent("FLUTTER_NOTIFICATION_LOCATOR_SERVICE"), 0))
                 .build()
 
         (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
